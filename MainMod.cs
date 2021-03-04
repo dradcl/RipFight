@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MelonLoader;
 using UnityEngine;
 
@@ -14,11 +14,10 @@ namespace RipFight
         private GameManager gameManager;
         private MultiplayerManager multiplayerManager;
         private SteamStatsAndAchievements steamStats;
+        private Weapon weapon;
+        private MultiplayerManager MPM;
 
-        public override void OnApplicationStart()
-        {
-            InitializeGameObjects();
-        }
+
 
         public override void OnUpdate()
         {
@@ -28,7 +27,12 @@ namespace RipFight
                 
                 //player.Jump();
             }
-
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                // Summons a Dummy Player
+                MPM.SpawnPlayerDummy(10);
+                MelonLogger.Msg("Summoned Pawn");
+            }
             // (T) Achievement Unlocks
             if (Input.GetKeyDown(KeyCode.T))
             {
@@ -36,12 +40,15 @@ namespace RipFight
                 {
                     steamStats.UnlockAchievement(eAchievement);
                     MelonLogger.Msg($"Unlocked: {eAchievement.ToString()}");
+
                 }
             }
         }
 
+
         public override void OnSceneWasInitialized(int level, string sceneName)
         {
+            InitializeGameObjects();
             levelNum = level;
 
             MelonLogger.Msg($"Level {sceneName} was loaded");
@@ -55,6 +62,9 @@ namespace RipFight
             gameManager = UnityEngine.Object.FindObjectOfType<GameManager>();
             multiplayerManager = UnityEngine.Object.FindObjectOfType<MultiplayerManager>();
             steamStats = UnityEngine.Object.FindObjectOfType<SteamStatsAndAchievements>();
+            MPM = UnityEngine.Object.FindObjectOfType<MultiplayerManager>();
+            // reminder u cant modify weapon ammo shitz
+            // weapon = UnityEngine.Object.FindObjectOfType<Weapon>();
         }
 
     }
