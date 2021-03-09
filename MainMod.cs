@@ -1,55 +1,73 @@
-﻿using System;
-using MelonLoader;
+﻿using MelonLoader;
 using UnityEngine;
+using System.Collections.Generic;
+using RipFight.Console;
 
 namespace RipFight
 {
     public class MainMod : MelonMod
     {
-        private int levelNum;
-        private Gravity gravity;
-        private Crown crown;
-        private Controller player;
-        private GameManager gameManager;
-        private MultiplayerManager multiplayerManager;
-        private SteamStatsAndAchievements steamStats;
-        private Weapon weapon;
-        private Transform[] transform;
-
+        private int levelNum; // Not used atm, but saved just in case.
         private float playerZ;
         private float playerY;
+        public static Vector3 worldPosition;
 
+        private bool listIsOpen = false;
+        private bool consoleIsOpen = false;
+
+        // This spot is dedicated to IS KING!!
+        public static Controller player;
+        public static GameManager gameManager;
+        public static MultiplayerManager multiplayerManager;
+        public static SteamStatsAndAchievements steamStats;
+        public static Weapon weapon;
+        public static Transform[] transform;
+        public static Explosion implode;
+        private ConsoleManager consoleManager = new ConsoleManager();
+
+        public static Controller[] players;
+        public static List<Controller> playerList = new List<Controller>();
+
+        public override void OnGUI()
+        {
+            if (listIsOpen)
+            {
+                GUI.TextArea(new Rect(0, 300, 300, 300), Helper.PlayerListToString());
+            }
+
+            if (consoleIsOpen)
+            {
+                GUI.Box(new Rect(0, Screen.height - 100, Screen.width, 50), "");
+                consoleManager.currentCommand = GUI.TextField(new Rect(0, Screen.height - 100, Screen.width, 50), consoleManager.currentCommand, 20);
+            }
+        }
         public override void OnUpdate()
         {
-            if (levelNum > 0 && player && !player.inactive)
+            worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if (consoleIsOpen && Input.GetKeyDown(KeyCode.Return))
             {
-                //crown.SetNewKing(player, true);
-                
-                //player.Jump();
+                consoleManager.SubmitCommand(consoleManager.currentCommand);
+                consoleManager.currentCommand = "";
+            }
+
+            // Use KeyCode.BackQuote in final.
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                consoleIsOpen = !consoleIsOpen;
             }
 
             // (N) Spawn A Dummy Player
             if (Input.GetKeyDown(KeyCode.N))
             {
-                multiplayerManager.SpawnPlayerDummy(10);
-                MelonLogger.Msg("Summoned Pawn");
-            }
+                playerList.Add(multiplayerManager.SpawnPlayerDummy(0, worldPosition).GetComponent<Controller>());
 
-            // (T) Achievement Unlocks
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                foreach (SteamStatsAndAchievements.EAchievement eAchievement in Enum.GetValues(typeof(SteamStatsAndAchievements.EAchievement)))
-                {
-                    steamStats.UnlockAchievement(eAchievement);
-                    MelonLogger.Msg($"Unlocked: {eAchievement.ToString()}");
-                }
+                MelonLogger.Msg($"Summoned Pawn {playerList.Count}");
             }
 
             // (Z) Teleport character to mouse position
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
                 playerZ = worldPosition.z;
                 playerY = worldPosition.y;
 
@@ -63,37 +81,23 @@ namespace RipFight
                 else
                     playerY += 2.0f;
 
-                player = UnityEngine.Object.FindObjectOfType<Controller>();
-
-                foreach (Rigidbody rigidbody in player.movement.rigidbodies)
+                foreach (Rigidbody rigidbody in players[0].movement.rigidbodies)
                 {
                     rigidbody.position = new Vector3(0, playerY, playerZ);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                listIsOpen = !listIsOpen;
+            }
         }
 
+        // SUS
         public override void OnSceneWasInitialized(int level, string sceneName)
         {
             levelNum = level;
-
-            //player = UnityEngine.Object.FindObjectOfType<Controller>();
-            transform = UnityEngine.Object.FindObjectsOfType<Transform>();
-            //InitializeGameObjects();
-
             MelonLogger.Msg($"Level {sceneName} was loaded");
         }
-
-        private void InitializeGameObjects()
-        {
-            //gravity = UnityEngine.Object.FindObjectOfType<Gravity>();
-            player = UnityEngine.Object.FindObjectOfType<Controller>();
-            crown = UnityEngine.Object.FindObjectOfType<Crown>();
-            gameManager = UnityEngine.Object.FindObjectOfType<GameManager>();
-            multiplayerManager = UnityEngine.Object.FindObjectOfType<MultiplayerManager>();
-            steamStats = UnityEngine.Object.FindObjectOfType<SteamStatsAndAchievements>();
-            // reminder u cant modify weapon ammo shitz
-            //weapon = UnityEngine.Object.FindObjectOfType<Weapon>();
-        }
-
     }
 }
