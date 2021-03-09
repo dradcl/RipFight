@@ -1,4 +1,4 @@
-﻿using MelonLoader;
+using MelonLoader;
 using System;
 using System.Linq;
 
@@ -30,9 +30,19 @@ namespace RipFight.Console
                     case "summon":
                         switch(commandArgs[1])
                         {
-                            case "dummy":
-                                SummonPawn();
+                            case "pawn":
+                                IncompleteCommand();
                                 break;
+                            case "defaultpawn":
+                                DefaultPawn();
+                                break;
+                            case "bluepawn":
+                                BluePawn();
+                                break;
+                            case "redpawn":
+                                RedPawn();
+                                break;
+
                         }
                         break;
                     case "unlockachievements":
@@ -60,10 +70,24 @@ namespace RipFight.Console
 
         // modify dll for dummy position
         // click to spawn
-        private void SummonPawn()
+        private void IncompleteCommand()
+        {
+            MelonLogger.Msg("Incomplete command try: \n Summon defaultpawn - Summons Yellow Pawn with no Physics \n summon bluepawn - Summons a Blue pawn with Physics \n summon redpawn - Summons a Red pawn with Physics");
+        }
+        private void DefaultPawn()
         {
             MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(0, MainMod.worldPosition).GetComponent<Controller>());
         }
+        private void BluePawn()
+        {
+            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(1, MainMod.worldPosition).GetComponent<Controller>());
+        }
+        private void RedPawn()
+        {
+            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(2, MainMod.worldPosition).GetComponent<Controller>());
+        }
+
+
 
         private void UnlockAchievements()
         {
