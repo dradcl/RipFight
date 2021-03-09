@@ -57,14 +57,6 @@ namespace RipFight
                 consoleIsOpen = !consoleIsOpen;
             }
 
-            // (N) Spawn A Dummy Player
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                playerList.Add(multiplayerManager.SpawnPlayerDummy(0, worldPosition).GetComponent<Controller>());
-
-                MelonLogger.Msg($"Summoned Pawn {playerList.Count}");
-            }
-
             // (Z) Teleport character to mouse position
             if (Input.GetKeyDown(KeyCode.Z))
             {
