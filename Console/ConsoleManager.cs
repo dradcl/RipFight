@@ -1,4 +1,4 @@
-using MelonLoader;
+﻿using MelonLoader;
 using System;
 using System.Linq;
 
@@ -6,7 +6,7 @@ namespace RipFight.Console
 {
     public sealed class ConsoleManager
     {
-        private string[] commands = new string[3] { "init", "summon", "unlockachievements" };
+        private string[] commands = new string[4] { "init", "summon", "unlockachievements", "give" };
 
         public string currentCommand = "";
         public enum CommandStatus
@@ -31,22 +31,15 @@ namespace RipFight.Console
                         switch(commandArgs[1])
                         {
                             case "pawn":
-                                IncompleteCommand();
+                                SummonPawn(commandArgs[2]);
                                 break;
-                            case "pawn default":
-                                DefaultPawn();
-                                break;
-                            case "pawn blue":
-                                BluePawn();
-                                break;
-                            case "pawn red":
-                                RedPawn();
-                                break;
-
                         }
                         break;
                     case "unlockachievements":
                         UnlockAchievements();
+                        break;
+                    case "give":
+                        MainMod.players[0].fighting.PickUpWeapon(Helper.MatchIDToWeapon(commandArgs[1]), null);
                         break;
                     default:
                         break;
@@ -70,24 +63,22 @@ namespace RipFight.Console
 
         // modify dll for dummy position
         // click to spawn
-        private void IncompleteCommand()
+        private void SummonPawn(string color)
         {
-            MelonLogger.Msg("Incomplete command try: \n Summon pawn default - Summons Yellow Pawn with no Physics \n summon pawn blue - Summons a Blue pawn with Physics \n summon pawn red - Summons a Red pawn with Physics");
-        }
-        private void DefaultPawn()
-        {
-            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(0, MainMod.worldPosition).GetComponent<Controller>());
-        }
-        private void BluePawn()
-        {
-            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(1, MainMod.worldPosition).GetComponent<Controller>());
-        }
-        private void RedPawn()
-        {
-            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(2, MainMod.worldPosition).GetComponent<Controller>());
-        }
+            byte spawnColor = 0;
 
+            switch (color)
+            {
+                case "blue":
+                    spawnColor = 1;
+                    break;
+                case "red":
+                    spawnColor = 2;
+                    break;
+            }
 
+            MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(spawnColor, MainMod.worldPosition).GetComponent<Controller>());
+        }
 
         private void UnlockAchievements()
         {
