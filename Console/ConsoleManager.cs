@@ -33,13 +33,13 @@ namespace RipFight.Console
                             case "pawn":
                                 IncompleteCommand();
                                 break;
-                            case "defaultpawn":
+                            case "pawn default":
                                 DefaultPawn();
                                 break;
-                            case "bluepawn":
+                            case "pawn blue":
                                 BluePawn();
                                 break;
-                            case "redpawn":
+                            case "pawn red":
                                 RedPawn();
                                 break;
 
@@ -72,7 +72,7 @@ namespace RipFight.Console
         // click to spawn
         private void IncompleteCommand()
         {
-            MelonLogger.Msg("Incomplete command try: \n Summon defaultpawn - Summons Yellow Pawn with no Physics \n summon bluepawn - Summons a Blue pawn with Physics \n summon redpawn - Summons a Red pawn with Physics");
+            MelonLogger.Msg("Incomplete command try: \n Summon pawn default - Summons Yellow Pawn with no Physics \n summon pawn blue - Summons a Blue pawn with Physics \n summon pawn red - Summons a Red pawn with Physics");
         }
         private void DefaultPawn()
         {
