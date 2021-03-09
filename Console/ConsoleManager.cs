@@ -22,16 +22,19 @@ namespace RipFight.Console
 
             if (commands.Contains(commandArgs[0]))
             {
-                switch (commandArgs[0])
+                switch (commandArgs[0].ToLower())
                 {
                     case "init":
                         Initialize();
                         break;
                     case "summon":
-                        switch(commandArgs[1])
+                        switch(commandArgs[1].ToLower())
                         {
                             case "pawn":
-                                SummonPawn(commandArgs[2]);
+                                if (commandArgs.Length > 2)
+                                    SummonPawn(commandArgs[2]);
+                                else
+                                    SummonPawn("default");
                                 break;
                         }
                         break;
@@ -65,10 +68,14 @@ namespace RipFight.Console
         // click to spawn
         private void SummonPawn(string color)
         {
-            byte spawnColor = 0;
+            // Defaults at 3 (green)
+            byte spawnColor = 3;
 
             switch (color)
             {
+                case "yellow":
+                    spawnColor = 0;
+                    break;
                 case "blue":
                     spawnColor = 1;
                     break;
