@@ -18,17 +18,17 @@ namespace RipFight.Console
 
         public CommandStatus SubmitCommand(string command)
         {
-            string[] commandArgs = currentCommand.Split(' ');
+            string[] commandArgs = currentCommand.ToLower().Split(' ');
 
             if (commands.Contains(commandArgs[0]))
             {
-                switch (commandArgs[0].ToLower())
+                switch (commandArgs[0])
                 {
                     case "init":
                         Initialize();
                         break;
                     case "summon":
-                        switch(commandArgs[1].ToLower())
+                        switch(commandArgs[1])
                         {
                             case "pawn":
                                 if (commandArgs.Length > 2)
@@ -64,8 +64,6 @@ namespace RipFight.Console
             MainMod.steamStats = UnityEngine.Object.FindObjectOfType<SteamStatsAndAchievements>();
         }
 
-        // modify dll for dummy position
-        // click to spawn
         private void SummonPawn(string color)
         {
             // Defaults at 3 (green)
