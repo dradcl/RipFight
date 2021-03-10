@@ -2,15 +2,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 using RipFight.Console;
+using System;
 
 namespace RipFight
 {
     public class MainMod : MelonMod
     {
         private int levelNum; // Not used atm, but saved just in case.
-        private float playerZ;
-        private float playerY;
         public static Vector3 worldPosition;
+        public Discord.Discord discordRPC;
 
         private bool listIsOpen = false;
         private bool consoleIsOpen = false;
@@ -28,6 +28,11 @@ namespace RipFight
         public static Controller[] players;
         public static List<Controller> playerList = new List<Controller>();
 
+        public override void OnApplicationStart()
+        {
+            discordRPC = new Discord.Discord(819053346207039498, (ulong)Discord.CreateFlags.Default);
+        }
+
         public override void OnGUI()
         {
             if (listIsOpen)
@@ -38,11 +43,13 @@ namespace RipFight
             if (consoleIsOpen)
             {
                 GUI.Box(new Rect(0, Screen.height - 100, Screen.width, 50), "");
-                consoleManager.currentCommand = GUI.TextField(new Rect(0, Screen.height - 100, Screen.width, 50), consoleManager.currentCommand, 20);
+                consoleManager.currentCommand = GUI.TextField(new Rect(0, Screen.height - 100, Screen.width, 50), consoleManager.currentCommand, 30);
             }
         }
         public override void OnUpdate()
         {
+            discordRPC.RunCallbacks();
+
             worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             if (consoleIsOpen && Input.GetKeyDown(KeyCode.Return))
@@ -60,22 +67,9 @@ namespace RipFight
             // (Z) Teleport character to mouse position
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                playerZ = worldPosition.z;
-                playerY = worldPosition.y;
-
-                if (playerZ > 0)
-                    playerZ -= 1.8f;
-                else
-                    playerZ += 1.8f;
-
-                if (playerY > 0)
-                    playerY -= 2.0f;
-                else
-                    playerY += 2.0f;
-
                 foreach (Rigidbody rigidbody in players[0].movement.rigidbodies)
                 {
-                    rigidbody.position = new Vector3(0, playerY, playerZ);
+                    rigidbody.position = new Vector3(0, worldPosition.y, worldPosition.z);
                 }
             }
 
@@ -88,6 +82,29 @@ namespace RipFight
         // SUS
         public override void OnSceneWasInitialized(int level, string sceneName)
         {
+            Discord.ActivityManager activityManager = discordRPC.GetActivityManager();
+            Discord.Activity activity = new Discord.Activity
+            {
+                State = $"Playing on {sceneName}",
+                Details = "Executing Commands...",
+                Timestamps =
+                {
+                    Start = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, // unix time conversion
+                },
+                Assets =
+                {
+                    LargeImage = "ripfightlogo",
+                    LargeText = "By: Karma Kitten & M1",
+                    SmallImage = "crown",
+                    SmallText = "IS KING",
+                },
+            };
+
+            activityManager.UpdateActivity(activity, result =>
+            {
+                MelonLogger.Msg($"Activity was updated. Status: {result}");
+            });
+
             levelNum = level;
             MelonLogger.Msg($"Level {sceneName} was loaded");
         }
