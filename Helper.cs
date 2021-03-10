@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace RipFight
+﻿namespace RipFight
 {
-    public class Helper
+    public sealed class Helper
     {
         public static string[] playerColors = { "default", "blue", "red" };
         public static string PlayerListToString()
@@ -17,8 +15,6 @@ namespace RipFight
 
         public static int MatchIDToWeapon(string weaponName)
         {
-            string[] weapons = Enum.GetNames(typeof(Weapons));
-            
             for (int i = 0; i < weapons.Length; i++)
             {
                 if (weapons[i].ToLower() == weaponName)
@@ -30,65 +26,73 @@ namespace RipFight
             return 0;
         }
 
-        private enum Weapons
+        // Some indices are unused. They still work when called, but they are not a unique weapon.
+        public static string[] weapons = new string[64]
         {
-            Pistol,
-            AK47,
-            Sword,
-            GrenadeLauncher,
-            BlinkDagger,
-            Sniper,
-            Revolver,
-            FreezeShooter,
-            RiotShield,
-            Fan,
-            Shotgun,
-            BallOfDoom,
-            ThrustCannon,
-            BowAndArrow,
-            MachineGun,
-            Lightsaber,
-            Uzi,
-            SilentMinigun,
-            MiniMinigun,
-            Minigun,
-            RicochetRifle,
-            StasisGun,
-            Bazooka,
-            Flamethrower,
-            SnakeRevolver,
-            SnakeGrenadeLauncher,
-            SnakeBazooka,
-            GlueGun,
-            LaserRocketLauncher,
-            GoldSword,
-            GoldMinigun,
-            GoldPistol,
-            CarbineRifle,
-            SnakeMinigun,
-            LavaWhip,
-            LavaBeam,
-            LavaShooter,
-            SnakeShotgun,
-            LavaGrenadeLauncher,
-            SpartanLaser,
-            LavaPistol,
-            BlackHoleCannon,
-            BossTriShot,
-            BossRazorShield,
-            BossTriBeam,
-            BossPulseLauncher = 46,
-            BossShooter,
-            BossBurstShooter,
-            BossWallmaker,
-            BossDubstepGun = 54,
-            BossRainbowSlowshot,
-            BossBounceshot = 58,
-            PumpkinLauncher,
-            BurstRifle,
-            DesertEagle,
-            SawedOffShotgun,
-            Spear
-        }
+            "Pistol",
+            "AK47",
+            "Sword",
+            "GrenadeLauncher",
+            "BlinkDagger",
+            "Sniper",
+            "Revolver",
+            "FreezeShooter",
+            "RiotShield",
+            "Fan",
+            "Shotgun",
+            "BallOfDoom",
+            "ThrustCannon",
+            "BowAndArrow",
+            "MachineGun",
+            "Lightsaber",
+            "Uzi",
+            "SilentMinigun",
+            "MiniMinigun",
+            "Minigun",
+            "RicochetRifle",
+            "StasisGun",
+            "Bazooka",
+            "Flamethrower",
+            "SnakeRevolver",
+            "SnakeGrenadeLauncher",
+            "SnakeBazooka",
+            "GlueGun",
+            "LaserRocketLauncher",
+            "GoldSword",
+            "GoldMinigun",
+            "GoldPistol",
+            "CarbineRifle",
+            "SnakeMinigun",
+            "LavaWhip",
+            "LavaBeam",
+            "LavaShooter",
+            "SnakeShotgun",
+            "LavaGrenadeLauncher",
+            "SpartanLaser",
+            "LavaPistol",
+            "BlackHoleCannon",
+            "BossTriShot",
+            "BossRazorShield",
+            "BossTriBeam",
+            "UnusedIndex1",
+            "BossPulseLauncher" ,
+            "BossShooter",
+            "BossBurstShooter",
+            "BossWallmaker",
+            "UnusedIndex2",
+            "UnusedIndex3",
+            "UnusedIndex4",
+            "UnusedIndex5",
+            "BossDubstepGun",
+            "BossRainbowSlowshot",
+            "UnusedIndex6",
+            "UnusedIndex7",
+            "BossBounceshot",
+            "PumpkinLauncher",
+            "BurstRifle",
+            "DesertEagle",
+            "SawedOffShotgun",
+            "Spear"
+        };
     }
 }
