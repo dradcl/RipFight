@@ -24,6 +24,7 @@ namespace RipFight
         public static Transform[] transform;
         public static Explosion implode;
         private ConsoleManager consoleManager = new ConsoleManager();
+        private ControllerHandler controllerHandler;
 
         public static Controller[] players;
         public static List<Controller> playerList = new List<Controller>();
@@ -82,11 +83,22 @@ namespace RipFight
         // SUS
         public override void OnSceneWasInitialized(int level, string sceneName)
         {
+            controllerHandler = UnityEngine.Object.FindObjectOfType<ControllerHandler>();
+
+            int playerCount = controllerHandler.ActivePlayers.Count; 
+            string gameState = "Game";
+
+            if (sceneName == "MainScene" && !MatchmakingHandler.IsNetworkMatch)
+            {
+                playerCount = 1; // Since the Controller in the lobby is not initialized until player input, this will just be set to 1
+                gameState = "Lobby";
+            }
+                
             Discord.ActivityManager activityManager = discordRPC.GetActivityManager();
             Discord.Activity activity = new Discord.Activity
             {
                 State = $"Playing on {sceneName}",
-                Details = "Executing Commands...",
+                Details = $"In {gameState} ({playerCount} / 4)",
                 Timestamps =
                 {
                     Start = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, // unix time conversion
