@@ -6,7 +6,7 @@ namespace RipFight.Console
 {
     public sealed class ConsoleManager
     {
-        private string[] commands = new string[4] { "init", "summon", "unlockachievements", "give" };
+        private string[] commands = new string[5] { "init", "summon", "unlockachievements", "give", "map" };
 
         public string currentCommand = "";
         public enum CommandStatus
@@ -43,6 +43,9 @@ namespace RipFight.Console
                         break;
                     case "give":
                         MainMod.players[0].fighting.PickUpWeapon(Helper.MatchIDToWeapon(commandArgs[1]), null);
+                        break;
+                    case "map":
+
                         break;
                     default:
                         break;
