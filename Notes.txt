@@ -11,3 +11,4 @@ x for mouse is z for character
 max: y: 10, z: -17.8  (top right)
 min: y: -10, z: 17.8  (bottom left)
 
+Reminder to change the dep path to the current dir for easy use/ building  
