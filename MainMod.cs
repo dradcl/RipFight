@@ -59,6 +59,11 @@ namespace RipFight
                 consoleManager.currentCommand = "";
             }
 
+            if (consoleIsOpen && Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                consoleManager.currentCommand = consoleManager.lastCommand;
+            }
+
             // Use KeyCode.BackQuote in final.
             if (Input.GetKeyDown(KeyCode.Tab))
             {

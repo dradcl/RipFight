@@ -9,6 +9,7 @@ namespace RipFight.Console
         private string[] commands = new string[5] { "init", "summon", "unlockachievements", "give", "map" };
 
         public string currentCommand = "";
+        public string lastCommand = "";
         public enum CommandStatus
         {
             Success,
@@ -52,6 +53,7 @@ namespace RipFight.Console
                 }
 
                 MelonLogger.Msg($"Ran command: \"{command}\"");
+                lastCommand = command;
                 return CommandStatus.Success;
             }
 
