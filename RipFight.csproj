@@ -36,11 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>F:\SteamLibrary\steamapps\common\StickFightTheGame\StickFight_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>Deps\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>F:\SteamLibrary\steamapps\common\StickFightTheGame\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>Deps\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -51,18 +51,26 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\SteamLibrary\steamapps\common\StickFightTheGame\StickFight_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>Deps\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Console\ConsoleGUI.cs" />
     <Compile Include="Console\ConsoleManager.cs" />
+    <Compile Include="DiscordSDK\ActivityManager.cs" />
+    <Compile Include="DiscordSDK\Constants.cs" />
+    <Compile Include="DiscordSDK\Core.cs" />
+    <Compile Include="DiscordSDK\ImageManager.cs" />
+    <Compile Include="DiscordSDK\LobbyManager.cs" />
+    <Compile Include="DiscordSDK\StorageManager.cs" />
+    <Compile Include="DiscordSDK\StoreManager.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Deps\discord_game_sdk.dll" />
     <Content Include="Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
