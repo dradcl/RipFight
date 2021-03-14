@@ -1,4 +1,4 @@
-﻿namespace RipFight
+namespace RipFight
 {
     public sealed class Helper
     {
@@ -25,10 +25,30 @@
 
             return 0;
         }
+        //hehe yes the good ol copy pasta :kekw:
+        public static int Camera(string cameratype)
+        {
+            for (int i = 0; i < Cameratype.Length; i++)
+            {
+                if (Cameratype[i].ToLower() == cameratype)
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+        public static string[] Cameratype = new string[4]
+        {
+           "Game",
+           "SceneView",
+           "Preview",
+           "VR"
+
+        };
 
         // Some indices are unused. They still work when called, but they are not a unique weapon.
         public static string[] weapons = new string[64]
-        {
+               {
             "Pistol",
             "AK47",
             "Sword",
@@ -93,6 +113,6 @@
             "DesertEagle",
             "SawedOffShotgun",
             "Spear"
-        };
+               };
     }
 }
