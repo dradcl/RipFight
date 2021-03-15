@@ -64,10 +64,12 @@ namespace RipFight
                 consoleManager.currentCommand = consoleManager.lastCommand;
             }
 
-            // Use KeyCode.BackQuote in final.
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 consoleIsOpen = !consoleIsOpen;
+
+                if (consoleIsOpen)
+                    consoleManager.Initialize();         
             }
 
             // (Z) Teleport character to mouse position

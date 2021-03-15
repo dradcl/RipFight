@@ -61,13 +61,13 @@ namespace RipFight.Console
             return CommandStatus.NotFound;
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             MainMod.players = UnityEngine.Object.FindObjectsOfType<Controller>();
             MainMod.gameManager = UnityEngine.Object.FindObjectOfType<GameManager>();
             MainMod.multiplayerManager = UnityEngine.Object.FindObjectOfType<MultiplayerManager>();
             MainMod.steamStats = UnityEngine.Object.FindObjectOfType<SteamStatsAndAchievements>();
-        }
+    }
 
         private void SummonPawn(string color)
         {
