@@ -14,3 +14,7 @@ __Commands List__:
 -``unlockachievements`` - Unlocks all the steam achievements  
 -``give`` (weapon) - gives the player a weapon (weapons are in weapons.txt, make sure its all lowercase)  
 -``init`` - initializes game objects manually, only use if it fails to do so automatically.
+
+# Known Bugs  
+- The initialized character will sometimes not be yours.  
+- Sometimes objects will fail at random, check Melon Logs.
