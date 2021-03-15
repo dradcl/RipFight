@@ -16,7 +16,7 @@ unlockachievements - Unlocks all the steam achievements
 
 give (weapon) - gives the player a weapon (weapons list will be down below, make sure its all lowercase)
 
-#weapons 
+# weapons 
 Pistol
 AK47
 Sword
