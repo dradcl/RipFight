@@ -1,5 +1,6 @@
 # RipFight
-A simple console for [Stick Fight](https://store.steampowered.com/app/674940/Stick_Fight_The_Game/) with custom commands. Based on [MelonLoader](https://melonwiki.xyz/#/).
+A simple console for [Stick Fight](https://store.steampowered.com/app/674940/Stick_Fight_The_Game/) with custom commands. Based on [MelonLoader](https://melonwiki.xyz/#/).  
+![image](https://cdn.discordapp.com/app-icons/819053346207039498/ff974a04c90c177827f8aea0ce7e9c43.png)
 
 # Usage
 Load into a match (or lobby) and press TAB to open the console. A list of commands can be found in [Features](#features)
