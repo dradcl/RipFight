@@ -19,6 +19,13 @@ __Commands List__:
 -``init`` - initializes game objects manually, only use if it fails to do so automatically.  
 -``map`` - Soon
 
+# Installation
+1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements) and follow the automated installation instructions.  
+2. Make sure you go to the settings tab in MelonLoader and enable "Show ALPHA Pre-Releases", then set the "Game Arch" to x86 before you click install.  
+3. Naviagte here in your install of Stick Fight: ``StickFightTheGame\StickFight_Data\Managed``  
+4. Drag and replace your ``Assembly-CSharp.dll`` with the one [here](https://github.com/karmakittenx/RipFight/tree/main/Deps)  
+5. Now download the latest release of [RipFight](https://github.com/karmakittenx/RipFight/releases), drag it into the ``Mods`` folder that MelonLoader created, launch the game, and enjoy!
+
 # Known Bugs  
 - The initialized character will sometimes not be yours.  
 - Sometimes objects will fail at random, check Melon Logs.
