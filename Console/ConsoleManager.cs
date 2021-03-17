@@ -1,12 +1,22 @@
 ﻿using MelonLoader;
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace RipFight.Console
 {
     public sealed class ConsoleManager
     {
         private string[] commands = new string[5] { "init", "summon", "unlockachievements", "give", "map" };
+
+        public GUIStyle consoleStyle = new GUIStyle()
+        {
+            fontStyle = FontStyle.Bold,
+            normal = new GUIStyleState()
+            {
+                textColor = Color.white,            
+            }
+        };
 
         public string currentCommand = "";
         public string lastCommand = "";

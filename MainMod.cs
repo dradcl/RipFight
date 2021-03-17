@@ -44,7 +44,7 @@ namespace RipFight
             if (consoleIsOpen)
             {
                 GUI.Box(new Rect(0, Screen.height - 100, Screen.width, 50), "");
-                consoleManager.currentCommand = GUI.TextField(new Rect(0, Screen.height - 100, Screen.width, 50), consoleManager.currentCommand, 30);
+                consoleManager.currentCommand = GUI.TextField(new Rect(0, Screen.height - 100, Screen.width, 75), consoleManager.currentCommand, 30, consoleManager.consoleStyle);
             }
         }
         public override void OnUpdate()
