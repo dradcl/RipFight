@@ -13,11 +13,11 @@ Load into a match (or lobby) and press TAB to open the console. A list of comman
 - Re-enter the most recent command, press up arrow.
 
 __Commands List__:  
--``summon pawn`` (default,red,blue, or yellow) - summons dummy pawns that you can hit  
+-``summon pawn`` (default,red,blue, or yellow) - Summons dummy pawns that you can hit  
 -``unlockachievements`` - Unlocks all the steam achievements  
--``give`` (weapon) - gives the player a weapon (weapons are in weapons.txt, make sure its all lowercase)  
--``init`` - initializes game objects manually, only use if it fails to do so automatically.  
--``map`` - Soon
+-``give {Weapon Name}`` - Gives the player a weapon (weapons are in weapons.txt)  
+-``init`` - Initializes game objects manually, only use if it fails to do so automatically.  
+-``map {Map Name}`` - Changes the map. Only works locally for now. (maps are in maps.txt)  
 
 # Installation
 1. Download [MelonLoader](https://melonwiki.xyz/#/?id=requirements) and follow the automated installation instructions.  
