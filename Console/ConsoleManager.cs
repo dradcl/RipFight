@@ -2,12 +2,14 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RipFight.Console
 {
     public sealed class ConsoleManager
     {
         private string[] commands = new string[5] { "init", "summon", "unlockachievements", "give", "map" };
+        private RFLevelManager rfLevelManager = new RFLevelManager();
 
         public GUIStyle consoleStyle = new GUIStyle()
         {
@@ -56,7 +58,7 @@ namespace RipFight.Console
                         MainMod.players[0].fighting.PickUpWeapon(Helper.MatchIDToWeapon(commandArgs[1]), null);
                         break;
                     case "map":
-
+                        MainMod.gameManager.StartMatch(rfLevelManager.GetMapByName(commandArgs[1]), true);
                         break;
                     default:
                         break;
@@ -98,6 +100,11 @@ namespace RipFight.Console
             }
 
             MainMod.playerList.Add(MainMod.multiplayerManager.SpawnPlayerDummy(spawnColor, MainMod.worldPosition).GetComponent<Controller>());
+        }
+
+        private void LoadMap()
+        {
+            SceneManager.LoadScene("Woods2");
         }
 
         private void UnlockAchievements()
