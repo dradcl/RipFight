@@ -28,4 +28,5 @@ __Commands List__:
 
 # Known Bugs  
 - The initialized character will sometimes not be yours.  
-- Sometimes objects will fail at random, check Melon Logs.
+- Sometimes objects will fail at random, check Melon Logs.  
+- The player count in the lobby will not be reflected on by the RPC.
