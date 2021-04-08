@@ -316,7 +316,7 @@ namespace Discord
 
         public Activity Activity;
     }
-
+//contributor lol
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public partial struct Relationship
     {
