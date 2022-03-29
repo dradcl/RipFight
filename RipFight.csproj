@@ -68,9 +68,13 @@
     <Compile Include="Helper.cs" />
     <Compile Include="MainMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RFLevelManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Deps\Assembly-CSharp.dll" />
     <Content Include="Deps\discord_game_sdk.dll" />
+    <Content Include="Deps\MelonLoader.dll" />
+    <Content Include="Deps\UnityEngine.dll" />
     <Content Include="Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
